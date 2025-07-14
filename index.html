@@ -1,0 +1,344 @@
+<div style="
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  z-index: 999;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  font-size: 14px;
+">
+  <img src="https://images2.imgbox.com/64/bc/XCosbNCq_o.jpg" alt="Logo" style="height: 24px; width: 24px; margin-right: 10px;">
+  Lion League 
+</div>
+<br>
+<!-- 🔥 Navbar Toggle Button -->
+<!-- 🔥 Futuristic Toggle Navbar ala SpaceX -->
+<style>
+  .nav-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    background-color: #00fff7;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .nav-toggle.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  nav#mainNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    color: #00fff7;
+    z-index: 1000;
+    min-width: 160px;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  nav#mainNav.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  nav#mainNav a {
+    color: #00fff7;
+    text-decoration: none;
+    margin: 8px 0;
+    transition: all 0.2s ease;
+  }
+
+  nav#mainNav a:hover {
+    transform: translateX(6px);
+    color: #fff;
+  }
+</style>
+
+<!-- 🔥 Hamburger Toggle Button -->
+<button class="nav-toggle" id="navToggleBtn" aria-label="Toggle Menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+
+
+<!-- 🔥 Navigation Menu -->
+<nav id="mainNav">
+  <a href="#gta sa multiplayer"><i class="fa-solid fa-house-chimney"></i> Home</a>
+<p>__________<</p></p>
+  <a href="https://wa.me/+6288225847918"><i class="fa-solid fa-user-plus"></i>Daftar</a>
+<p>__________></p></p>
+  <a href="#"><i class="fa-solid fa-calendar-days"></i> Jadwal</a>
+<p>__________<</p></p>
+  <a href="https://wa.me/+6288225847918"><i class="fa-brands fa-whatsapp"></i>  Contact</a>
+<p>__________></p></p></p>
+
+</nav>
+
+<script>
+  const navToggleBtn = document.getElementById('navToggleBtn');
+  const mainNav = document.getElementById('mainNav');
+
+  navToggleBtn.addEventListener('click', () => {
+    navToggleBtn.classList.toggle('active');
+    mainNav.classList.toggle('show');
+  });
+</script>
+
+
+<br>
+<br>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ranking Liga SAMP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+
+
+    body {
+  font-family: 'Orbitron', sans-serif;
+  background-color: #0a0a0a; /* pure darkness */
+  background-image: radial-gradient(circle at top left, rgba(0, 255, 255, 0.08), transparent 60%),
+                    radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.06), transparent 40%);
+  color: #00fff7;
+  min-height: 100vh;
+  padding: 20px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+    
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px #00fff7;
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 10px;
+      font-size: 12px;
+    }
+
+    th, td {
+      padding: 6px;
+      text-align: center;
+      color: #fff;
+    }
+
+    th {
+      background-color: rgba(0, 255, 255, 0.1);
+      font-weight: bold;
+      text-shadow: 0 0 3px #00fff7;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.03);
+    }
+
+    tr:hover {
+      background: rgba(0, 255, 255, 0.08);
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      box-shadow: 0 0 3px #00fff7;
+    }
+
+    .tax-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.4em;
+      }
+
+      th, td {
+        padding: 4px;
+        font-size: 11px;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .tax-icon {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Lion League X Indomax🇮🇩</h1>
+<h5 style="color: #C04BFD; margin-top: -10px;">GTA SA MULTIPLAYER</h5>
+
+
+<br>
+  <div class="table-container">
+    <table id="teamTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Logo</th>
+          <th>Team</th>
+          <th>P</th>
+          <th>S</th>
+          <th>M</th>
+          <th>PJ</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    const teams = [
+      { name: "RRQ :MP", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb3nrydE_nkmUsIgAUcckn2InigtGNlVS7IKDUAC0RbVlTJzFKrotiYfSx&s=10", points: 1009, score: 20, matches: "0/5", tax: "☑️" },
+      { name: "RRQ SA:MP", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb3nrydE_nkmUsIgAUcckn2InigtGNlVS7IKDUAC0RbVlTJzFKrotiYfSx&s=10", points: 100, score: 20, matches: "0/5", tax: "☑️" },
+
+    ];
+
+    function renderTeams() {
+  const tbody = document.querySelector("tbody");
+  tbody.innerHTML = "";
+
+  // 🔥 SORTING: berdasarkan points, kalau sama baru score
+  teams.sort((a, b) => {
+    if (b.points !== a.points) {
+      return b.points - a.points; // urutkan berdasarkan point tertinggi
+    } else {
+      return b.score - a.score; // kalau point sama, urutkan berdasarkan score
+    }
+  });
+
+  // 🔁 Looping hasil yang sudah disortir
+  teams.forEach((team, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td><img src="${team.logo}" alt="logo"></td>
+      <td>${team.name}</td>
+      <td>${team.points}</td>
+      <td>${team.score}</td>
+      <td style="color: ${team.matches === '5/5' ? 'red' : '#fff'};">${team.matches}</td>
+      <td>${team.tax}</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+    renderTeams();
+  </script>
+</body>
+
+
+</html>
+
+
+<div id="triggerArea" style="
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 9999;
+  background: transparent;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  user-select: none;
+"></div>
+
+
+<audio id="aiWelcome" preload="auto">
+  <source src="https://c.top4top.io/m_3482uqxkh0.mp3" type="audio/mp3">
+</audio>
+
+<script>
+  const audio = document.getElementById("aiWelcome");
+  const trigger = document.getElementById("triggerArea");
+
+  const playAudio = () => {
+    audio.volume = 0.7;
+    audio.play().then(() => {
+      trigger.remove(); // Remove layer after berhasil
+    }).catch(err => {
+      console.warn("Still blocked, but hacker mode active.");
+    });
+  };
+
+  // Trigger by movement or touch
+  trigger.addEventListener("mousemove", playAudio);
+  trigger.addEventListener("touchstart", playAudio);
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
