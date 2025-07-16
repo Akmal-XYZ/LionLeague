@@ -15,7 +15,7 @@
   font-size: 14px;
 ">
   <img src="https://images2.imgbox.com/64/bc/XCosbNCq_o.jpg" alt="Logo" style="height: 24px; width: 24px; margin-right: 10px;">
-  Lion League 
+  Lion League S1
 </div>
 <br>
 <!-- 🔥 Navbar Toggle Button -->
@@ -362,3 +362,242 @@
   trigger.addEventListener("touchstart", playAudio);
 </script>
 
+<br>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lion League Schedule</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+    body {
+      background-color: #0a0a0a;
+      background-image:
+        radial-gradient(circle at top left, rgba(0, 255, 255, 0.08), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(255, 0, 255, 0.06), transparent 40%);
+      color: #00fff7;
+      min-height: 100vh;
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+      width: 100%;
+      max-width: 800px;
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px #00fff7;
+    }
+    select {
+      display: block;
+      margin: 0 auto 2rem;
+      padding: 0.6rem 1rem;
+      font-size: 1rem;
+      background: #111;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .match-day {
+      margin-bottom: 2rem;
+      border-left: 4px solid #00eaff;
+      padding-left: 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeIn 1s ease forwards;
+      animation-play-state: paused;
+    }
+    .match {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0.6rem 0;
+      padding: 1rem;
+      background: rgba(0, 255, 255, 0.05);
+      border-radius: 12px;
+      gap: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.5s ease forwards;
+      animation-play-state: paused;
+    }
+    .match.visible, .match-day.visible {
+      animation-play-state: running;
+    }
+    .match:hover {
+      background: rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .match img {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .time {
+      font-weight: bold;
+      color: #00eaff;
+      min-width: 90px;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      .match {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div style="
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    padding: 8px 14px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+    z-index: 999;
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 14px;">
+    <img src="https://images2.imgbox.com/64/bc/XCosbNCq_o.jpg" alt="Logo" style="height: 24px; width: 24px; margin-right: 10px;">
+    Lion League S1
+  </div>
+
+  <div class="overlay">
+    <h1>📅 Jadwal Pertandingan Lion League</h1>
+    <select id="teamFilter" onchange="filterSchedule()">
+      <option value="all">📅 Semua Jadwal</option>
+      <option value="POKER HIGH">♠ POKER HIGH</option>
+      <option value="RRQ SA:MP">🔥 RRQ SA:MP</option>
+      <option value="MARLONG">🏹 MARLONG</option>
+      <option value="SNG">🌀 SNG</option>
+      <option value="THE KILLERS">💀 THE KILLERS</option>
+      <option value="SADDOX">⚔ SADDOX</option>
+      <option value="SHIMARU-X">🔮 SHIMARU-X</option>
+      <option value="SC BALCERONA">⚽ SC BALCERONA</option>
+      <option value="TEMPE OREK">🍱 TEMPE OREK</option>
+      <option value="AMBACHASTER UNITED">🛡 AMBACHASTER UNITED</option>
+    </select>
+    <div id="schedule"></div>
+  </div>
+
+  <script>
+    const logos = {
+      "POKER HIGH": "https://images2.imgbox.com/f5/e7/sBZBKrdf_o.jpg",
+      "RRQ SA:MP": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRb3nrydE_nkmUsIgAUcckn2InigtGNlVS7IKDUAC0RbVlTJzFKrotiYfSx&s=10",
+      "MARLONG": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM0cYh30N2eGR6PmHOcjJYksz0wxmtp0bC64a0S46Noo3ytoUZurLKmOI&s=10",
+      "SNG": "https://images2.imgbox.com/f0/5c/XdjvUTI4_o.jpg",
+      "THE KILLERS": "https://images2.imgbox.com/6c/7c/4lPSO9IY_o.jpg",
+      "SADDOX": "https://images2.imgbox.com/66/8e/jdIemSJx_o.jpg",
+      "SHIMARU-X": "https://thumbs2.imgbox.com/7c/4e/YmNT9KjU_t.jpg",
+      "SC BALCERONA": "https://images2.imgbox.com/3c/f6/6TskRwq2_o.jpg",
+      "TEMPE OREK": "https://images2.imgbox.com/35/89/0czSLxdn_o.jpg",
+      "AMBACHASTER UNITED": "https://thumbs2.imgbox.com/a4/75/4wWMyg8i_t.jpg"
+    };
+
+    const scheduleData = [
+      ["Kamis, 17 Juli 2025", [["19:00", "SNG", "SADDOX"], ["20:00", "THE KILLERS", "TEMPE OREK"]]],
+      ["Jumat, 18 Juli 2025", [["19:00", "RRQ SA:MP", "MARLONG"], ["20:00", "SC BALCERONA", "AMBACHASTER UNITED"]]],
+      ["Sabtu, 19 Juli 2025", [["19:00", "POKER HIGH", "SHIMARU-X"], ["20:00", "THE KILLERS", "SC BALCERONA"]]],
+      ["Minggu, 20 Juli 2025", [["19:00", "TEMPE OREK", "RRQ SA:MP"], ["20:00", "SADDOX", "POKER HIGH"]]],
+      ["Senin, 21 Juli 2025", [["19:00", "AMBACHASTER UNITED", "SHIMARU-X"], ["20:00", "SNG", "MARLONG"]]],
+      ["Selasa, 22 Juli 2025", [["19:00", "SC BALCERONA", "TEMPE OREK"], ["20:00", "SADDOX", "AMBACHASTER UNITED"]]],
+      ["Rabu, 23 Juli 2025", [["19:00", "SHIMARU-X", "SNG"], ["20:00", "POKER HIGH", "THE KILLERS"]]],
+      ["Kamis, 24 Juli 2025", [["19:00", "MARLONG", "SC BALCERONA"], ["20:00", "RRQ SA:MP", "AMBACHASTER UNITED"]]],
+      ["Jumat, 25 Juli 2025", [["19:00", "TEMPE OREK", "SHIMARU-X"], ["20:00", "THE KILLERS", "MARLONG"]]],
+      ["Sabtu, 26 Juli 2025", [["19:00", "RRQ SA:MP", "POKER HIGH"], ["20:00", "SADDOX", "SNG"]]],
+      ["Minggu, 27 Juli 2025", [["19:00", "AMBACHASTER UNITED", "TEMPE OREK"], ["20:00", "SHIMARU-X", "THE KILLERS"]]],
+      ["Senin, 28 Juli 2025", [["19:00", "POKER HIGH", "SC BALCERONA"], ["20:00", "RRQ SA:MP", "SNG"]]],
+      ["Selasa, 29 Juli 2025", [["19:00", "SADDOX", "MARLONG"]]]
+    ];
+
+    function filterSchedule() {
+      const team = document.getElementById("teamFilter").value;
+      const container = document.getElementById("schedule");
+      container.innerHTML = "";
+
+      scheduleData.forEach(([day, matches]) => {
+        const filtered = matches.filter(([_, t1, t2]) => team === "all" || t1 === team || t2 === team);
+        if (filtered.length > 0) {
+          const dayDiv = document.createElement("div");
+          dayDiv.className = "match-day";
+          dayDiv.innerHTML = `<h3>${day}</h3>`;
+          container.appendChild(dayDiv);
+
+          filtered.forEach(([time, team1, team2]) => {
+            const matchDiv = document.createElement("div");
+            matchDiv.className = "match";
+            matchDiv.innerHTML = `
+              <span class="time">${time} WIB</span>
+              <div class="team"><img src="${logos[team1]}" alt="${team1}" /><strong>${team1}</strong></div>
+              <span>vs</span>
+              <div class="team"><img src="${logos[team2]}" alt="${team2}" /><strong>${team2}</strong></div>
+            `;
+            container.appendChild(matchDiv);
+          });
+        }
+      });
+
+      // Animate visible items
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.match, .match-day').forEach(el => {
+          el.classList.add('visible');
+        });
+      });
+    }
+
+    filterSchedule();
+  </script>
+</body>
+</html>
+<br>
+
+<footer>
+    &copy; 2025 AkmalShellby.
+  </footer>
+</body>
+</html>
