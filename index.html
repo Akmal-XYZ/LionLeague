@@ -276,7 +276,7 @@
   { name: "MARLONG", logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM0cYh30N2eGR6PmHOcjJYksz0wxmtp0bC64a0S46Noo3ytoUZurLKmOI&s=10", points: 0, score: 0, matches: "0/5", tax: "☑️" },
   { name: "SNG", logo: "https://images2.imgbox.com/f0/5c/XdjvUTI4_o.jpg", points: 3, score: 5, matches: "1/5", tax: "☑️" },
 
-  { name: "THE KILLERS", logo: "https://images2.imgbox.com/6c/7c/4lPSO9IY_o.jpg", points: 0, score: 0, matches: "0/5", tax: "☑️" },
+  { name: "THE KILLERS", logo: "https://images2.imgbox.com/6c/7c/4lPSO9IY_o.jpg", points: 0, score: 0, matches: "1/5", tax: "☑️" },
 
  { name: "SADDOX", logo: "https://images2.imgbox.com/66/8e/jdIemSJx_o.jpg", points: 3, score: 3, matches: "2/5", tax: "☑️" },
 
@@ -284,7 +284,7 @@
 
 { name: "SC BALCERONA", logo: "https://images2.imgbox.com/3c/f6/6TskRwq2_o.jpg", points: 0, score: 0, matches: "0/5", tax: "☑️" },
 
-{ name: "TEMPE OREK", logo: "https://images2.imgbox.com/35/89/0czSLxdn_o.jpg", points: 0, score: 0, matches: "0/5", tax: "☑️" },
+{ name: "TEMPE OREK", logo: "https://images2.imgbox.com/35/89/0czSLxdn_o.jpg", points: 0, score: 2, matches: "1/5", tax: "☑️" },
 
 { name: "AMBACHASTER UNITED", logo: "https://thumbs2.imgbox.com/a4/75/4wWMyg8i_t.jpg", points: 0, score: 0, matches: "0/5", tax: "☑️" },
 
@@ -296,12 +296,14 @@
 
   // 🔥 SORTING: berdasarkan points, kalau sama baru score
   teams.sort((a, b) => {
-    if (b.points !== a.points) {
-      return b.points - a.points; // urutkan berdasarkan point tertinggi
-    } else {
-      return b.score - a.score; // kalau point sama, urutkan berdasarkan score
-    }
-  });
+  if (b.points !== a.points) {
+    return b.points - a.points; // Urut dari yang paling tinggi poinnya
+  } else if (b.score !== a.score) {
+    return b.score - a.score; // Kalau poin sama, urut dari skor tertinggi
+  } else {
+    return a.name.localeCompare(b.name); // Kalau sama juga, urut nama tim buat stabilitas
+  }
+});
 
   // 🔁 Looping hasil yang sudah disortir
   teams.forEach((team, index) => {
@@ -364,6 +366,73 @@
 
 <br>
 
+<div id="visitor-stats" style="margin-top: 40px; text-align: center; font-family: 'Orbitron', sans-serif; color: #00fff7; font-size: 14px; text-shadow: 0 0 6px #00fff7; letter-spacing: 1px;">
+  <span style="opacity: 0.6;">Kunjungan website hari ini:</span> <span id="visitorCount" style="font-size: 16px; font-weight: bold;">...</span>
+</div>
+
+<script>
+(function() {
+  const DISPLAY_ID = "visitorCount";
+  const START_COUNT = 500;
+  const REFRESH_RESET_TIME = 1 * 60 * 1000; // 1 menit dalam ms
+  const MIN_INCREMENT = 1;
+  const MAX_INCREMENT = 3;
+
+  function getStoredData() {
+    return {
+      count: parseInt(localStorage.getItem("visitCount") || START_COUNT),
+      lastTime: parseInt(localStorage.getItem("visitTime") || 0)
+    };
+  }
+
+  function storeData(count) {
+    localStorage.setItem("visitCount", count);
+    localStorage.setItem("visitTime", Date.now());
+  }
+
+  function animateCounter(displayEl, target) {
+    let current = parseInt(displayEl.textContent.replace(/,/g, "") || "0");
+    if (current >= target) return;
+    const step = Math.ceil((target - current) / 10);
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) {
+        current = target;
+        clearInterval(interval);
+      }
+      displayEl.textContent = current.toLocaleString("id-ID");
+    }, 60);
+  }
+
+  const { count, lastTime } = getStoredData();
+  const now = Date.now();
+  const diff = now - lastTime;
+
+  let newCount;
+  if (diff > REFRESH_RESET_TIME) {
+    // reset ke 500 tapi kasih impresi tambah 10-20 biar ga keliatan nge-cheat
+    newCount = START_COUNT + Math.floor(Math.random() * 11) + 10;
+  } else {
+    // lanjut dan tambah random
+    newCount = count + Math.floor(Math.random() * (MAX_INCREMENT - MIN_INCREMENT + 1)) + MIN_INCREMENT;
+  }
+
+  const display = document.getElementById(DISPLAY_ID);
+  display.textContent = count.toLocaleString("id-ID");
+  animateCounter(display, newCount);
+  storeData(newCount);
+
+  // auto increment tiap 4-7 detik
+  setInterval(() => {
+    const randomAdd = Math.floor(Math.random() * (MAX_INCREMENT - MIN_INCREMENT + 1)) + MIN_INCREMENT;
+    const updated = parseInt(localStorage.getItem("visitCount") || START_COUNT) + randomAdd;
+    animateCounter(display, updated);
+    storeData(updated);
+  }, Math.floor(Math.random() * 3000) + 4000);
+})();
+</script>
+
+<br>
 <!DOCTYPE html>
 <html lang="id">
 <head>
