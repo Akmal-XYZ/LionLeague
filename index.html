@@ -700,3 +700,84 @@
 </html>
 
 
+<!-- SAWERIA BOX DENGAN TOMBOL + BESAR & CTA -->
+<div id="saweriaBox" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 280px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 0 14px rgba(0,255,255,0.2);
+  z-index: 9999;
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  font-size: 13px;
+">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+    <div style="display: flex; align-items: center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7TyU7bSCxpvlEVcdfFP7Imq6jV9RakFCeVOb_RteJ23eJKNyODsy3HolS&s=10" alt="Saweria" style="height: 18px; width: 18px; margin-right: 8px;">
+      <strong style="font-size: 13px;">Pesan Saweria</strong>
+    </div>
+    <button onclick="hideSaweria()" title="Sembunyikan" style="
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 0;
+    ">×</button>
+  </div>
+
+  <div id="saweriaMessages" style="margin-bottom: 10px;"></div>
+
+  <!-- CTA TOMBOL DONASI -->
+  <button onclick="window.open('https://saweria.co/lionleague', '_blank')" style="
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #00fff7, #ff00cc);
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,255,255,0.3);
+    transition: transform 0.2s ease;
+  " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    💸 Kirim Pesan Sekarang!
+  </button>
+</div>
+
+<script>
+  const initialMessages = [
+    "GELATIK BOT GABISA MAEN!",
+    "FOLLOW TT RADITVSAMP!",
+    "Yang Baca Yatim!"
+  ];
+
+  function renderSaweria(messages) {
+    const container = document.getElementById("saweriaMessages");
+    container.innerHTML = "";
+    const latest = messages.slice(-3).reverse();
+    latest.forEach(msg => {
+      const el = document.createElement("div");
+      el.style.marginBottom = "8px";
+      el.style.padding = "6px 10px";
+      el.style.background = "rgba(255,255,255,0.05)";
+      el.style.borderRadius = "8px";
+      el.style.boxShadow = "0 0 4px rgba(0,255,255,0.1)";
+      el.textContent = msg;
+      container.appendChild(el);
+    });
+  }
+
+  function hideSaweria() {
+    const box = document.getElementById("saweriaBox");
+    box.style.display = "none";
+  }
+
+  renderSaweria(initialMessages);
+</script>
